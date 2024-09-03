@@ -8,7 +8,7 @@ const fetchData = async () => {
         method: 'GET',
         url: 'https://yt-api.p.rapidapi.com/home',
         headers: {
-            'x-rapidapi-key': '8de1eff9a8msh7f03f807bf04a3ep11b13ajsnad2aee6c21ba',
+            'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
             'x-rapidapi-host': 'yt-api.p.rapidapi.com'
         }
     };
@@ -20,17 +20,18 @@ const fetchData = async () => {
     }
 };
 
-export const searchFetchApi = async (searchVal) => {
+export const searchFetchApi = async () => {
     const options = {
         method: 'GET',
         url: 'https://yt-api.p.rapidapi.com/search',
         params: { query: 'cat' },
         headers: {
-            'x-rapidapi-key': '8de1eff9a8msh7f03f807bf04a3ep11b13ajsnad2aee6c21ba',
+            'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
             'x-rapidapi-host': 'yt-api.p.rapidapi.com'
         }
     };
     const response = await axios.request(options);
+    console.log(response.data.data)
     return response.data.data
 }
 

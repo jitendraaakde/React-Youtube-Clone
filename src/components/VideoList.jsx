@@ -5,19 +5,23 @@ import { fetchingActions } from "../store/fetchingDataSlice"
 import store from "../store"
 import axios, { all } from "axios"
 import LoadingSpinner from "./LoadingSpinner"
+import { searchFetchApi } from "../store/handleFetch"
 
 const VideoList = () => {
     const dispatch = useDispatch()
     const videoData = useSelector(state => state.fetchingData)
     const allVideos = videoData.data
-    console.log('store state', store.getState())
 
+    const searcAPI = async () => {
+        const data = await searchFetchApi()
+        console.log('Search API Data', data)
+    }
     const fetchData = async () => {
         const options = {
             method: 'GET',
             url: 'https://yt-api.p.rapidapi.com/home',
             headers: {
-                'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
+                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -31,12 +35,13 @@ const VideoList = () => {
 
     useEffect(() => {
         fetchData();
+        searcAPI()
         return () => {
         };
-    }, [allVideos]);
+    }, []);
 
     return <div className=" container gap-4" >
-        {allVideos.length === 0 ? <LoadingSpinner /> : allVideos.map((item) => <Video key={item.id} item={item} />)}
+        {allVideos.length == 0 ? <LoadingSpinner /> : allVideos.map((item) => <Video key={item.id} item={item} />)}
     </div>
 }
 

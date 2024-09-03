@@ -11,11 +11,7 @@ const fetchingSlice = createSlice({
             state.data = action.payload.data
         },
         searchFetch: async (state, action) => {
-            console.log('Initial data ', state, action)
-            const data = await searchFetchApi(action.payload.data)
-            console.log('Data of Videos from API', data)
-            state.data = data
-            console.log(state)
+
         }
 
     }

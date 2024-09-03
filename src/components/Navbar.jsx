@@ -17,10 +17,9 @@ const Navbar = () => {
     const handleNavbar = () => {
         dispatch(sidebarAction.toggleSidebar())
     }
-    const handleSearch = (val) => {
-        console.log(val)
-        dispatch(fetchingActions.searchFetch(val))
-    }
+    // const handleSearch = () => {
+    //     dispatch(fetchingActions.searchFetch(val))
+    // }
 
     return (
         <div className="w-full h-[56px] fixed p-[0px_16px] z-100 flex justify-between items-center top-0 left-0 z-200">
@@ -37,7 +36,8 @@ const Navbar = () => {
                     className="w-full h-full p-[0px_15px] border-2 border-solid rounded-[20px_0px_0px_20px]"
                     placeholder="Search"
                 />
-                <button onClick={() => handleSearch(inputData.current.value)} className="flex justify-center items-center w-[64px] h-[40px] border-2 border-solid p-[1px_6px] cursor-pointer bg-slate-100 rounded-[0px_40px_40px_0px]">
+                {/* onClick={() => handleSearch()} */}
+                <button className="flex justify-center items-center w-[64px] h-[40px] border-2 border-solid p-[1px_6px] cursor-pointer bg-slate-100 rounded-[0px_40px_40px_0px]">
                     <CiSearch className="w-[24px] h-[24px]" />
                 </button>
             </div>
