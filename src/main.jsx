@@ -5,10 +5,13 @@ import { Provider } from 'react-redux'
 import './index.css'
 import Home from './components/Home.jsx'
 import store from './store/index.js'
+import SingleHome from './components/Single_Video-Compo/SingleHome.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <Home></Home>
+    path: '/', element: <Home></Home>, children: [
+      { path: 'video', element: <SingleHome /> }
+    ]
   }
 ])
 

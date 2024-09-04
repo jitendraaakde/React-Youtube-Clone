@@ -13,14 +13,37 @@ import { IoMusicalNoteOutline } from "react-icons/io5";
 import { PiFilmSlateBold } from "react-icons/pi";
 import { MdOutlineWifiTethering } from "react-icons/md";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { sidebarAction } from "../store/navbarSlice";
+import { searchFetchApi } from "../store/handleFetch";
 const Sidebar = () => {
+    const currFetch = useSelector(state => state.sidebar)
 
     const sidebarItems = [
         {
             title: "Home",
             logo: <IoMdHome className="size-6"></IoMdHome>
 
+        },
+        {
+            title: "Trending",
+            logo: <BsFire className="size-6" />
+        },
+        {
+            title: "Shopping",
+            logo: <AiOutlineShopping className="size-6" />
+        },
+        {
+            title: "Music",
+            logo: <IoMusicalNoteOutline className="size-6" />
+        },
+        {
+            title: "Films",
+            logo: <PiFilmSlateBold className="size-6" />
+        },
+        {
+            title: "Live",
+            logo: <MdOutlineWifiTethering className="size-6" />
         },
         {
             title: "Shorts",
@@ -49,45 +72,19 @@ const Sidebar = () => {
         {
             title: "Liked videos",
             logo: <AiOutlineLike className="size-6" />
-        },
-        {
-            title: "Trending",
-            logo: <BsFire className="size-6" />
-        },
-        {
-            title: "Shopping",
-            logo: <AiOutlineShopping className="size-6" />
-        },
-        {
-            title: "Music",
-            logo: <IoMusicalNoteOutline className="size-6" />
-        },
-        {
-            title: "Films",
-            logo: <PiFilmSlateBold className="size-6" />
-        },
-        {
-            title: "Live",
-            logo: <MdOutlineWifiTethering className="size-6" />
-        },
-        {
-            title: "Music",
-            logo: <IoMusicalNoteOutline className="size-6" />
-        },
-        {
-            title: "Films",
-            logo: <PiFilmSlateBold className="size-6" />
-        },
-        {
-            title: "Live",
-            logo: <MdOutlineWifiTethering className="size-6" />
         }
     ];
     const { toggle } = useSelector(state => state.sidebar)
     const marginLeft = toggle ? "w-[80px]" : ' w-[200px]'
+    const dispatch = useDispatch()
+    const currCategory = currFetch.fetchCategory;
+    const categoryData = (value) => {
+        dispatch(searchFetchApi(value));
+        dispatch(sidebarAction.changeCategory(value))
+    }
 
     return <div className={`h-full element ${marginLeft} ${toggle && 'navbar-css'} overflow-y-auto p-3 mt-16  flex fixed top-0 left-0 z-10 float-left flex-col`}>
-        {sidebarItems.map((item) => <SidebarButtons item={item} />)}
+        {sidebarItems.map((item) => <SidebarButtons key={item.title} categoryData={categoryData} currCategory={currCategory} item={item} />)}
     </div>
 }
 export default Sidebar

@@ -11,6 +11,22 @@ const Video = ({ item }) => {
 
     if (!isValidItem) return null;
 
+    function formatNumber(number) {
+        if (number < 1_000) {
+            // Less than 1000, return the number itself
+            return number.toString();
+        } else if (number < 1_000_000) {
+            // Less than 1 million, format as thousands with 'K'
+            return (number / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
+        } else if (number < 1_000_000_000) {
+            // Less than 1 billion, format as millions with 'M'
+            return (number / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+        } else {
+            // 1 billion or more, format as billions with 'B'
+            return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
+        }
+    }
+
     return (
         <div className="w-[343px] h-[300px] max-w-[800px] min-w-[310px] gap-1">
             <img
@@ -28,9 +44,9 @@ const Video = ({ item }) => {
                 <div className='mb-2'>
                     <p className='truncated-multiline ml-1'>{item.title}</p>
                     <p className='text-[14px]'>{item.channelTitle}</p>
-                    <p className='text-[14px]'>{item.viewCount} Views · {item.publishedTimeText}</p>
+                    <p className='text-[14px]'>{formatNumber(item.viewCount)} Views · {item.publishedTimeText}</p>
                 </div>
-                <div>
+                <div className="float-right">
                     <BsThreeDotsVertical className='w-4 h-4' />
                 </div>
             </div>

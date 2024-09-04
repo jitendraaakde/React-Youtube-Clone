@@ -1,4 +1,11 @@
 const LoadingSpinner = () => {
-    return <h2>Loading....</h2>
+    return (
+        <div className='load-bar'>
+            <div className='bar'></div>
+            <div className='bar'></div>
+            <div className='bar'></div>
+        </div>
+    )
 }
+
 export default LoadingSpinner

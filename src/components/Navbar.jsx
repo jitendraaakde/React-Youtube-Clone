@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sidebarAction } from "../store/navbarSlice";
 import { useRef } from "react";
 import { fetchingActions } from "../store/fetchingDataSlice";
+import { searchFetchApi } from "../store/handleFetch";
 
 const Navbar = () => {
     const { toggle } = useSelector(state => state.sidebar)
@@ -17,27 +18,29 @@ const Navbar = () => {
     const handleNavbar = () => {
         dispatch(sidebarAction.toggleSidebar())
     }
-    // const handleSearch = () => {
-    //     dispatch(fetchingActions.searchFetch(val))
-    // }
+    const handleSearch = (val) => {
+        dispatch(searchFetchApi(val));
+
+    };
 
     return (
-        <div className="w-full h-[56px] fixed p-[0px_16px] z-100 flex justify-between items-center top-0 left-0 z-200">
+        <div className="w-full h-[56px] fixed p-[0px_16px] z-500 flex justify-between items-center top-0 left-0 z-1000 bg-white">
             <div className="flex justify-evenly items-center w-[169px] h-[56px] gap-1">
                 <div onClick={handleNavbar} className="cursor-pointer"><FiMenu className="w-[24px] h-[24px]" /></div>
                 <div className="w-[90px] h-[20px]">
-                    <img src={youtubeLogo} alt="YouTube Logo" className="w-full h-auto" />
+                    <a href="/"> <img src={youtubeLogo} alt="YouTube Logo" className="w-full h-auto" /></a>
+
                 </div>
             </div>
 
             <div className="w-[45%] h-10 flex items-center">
                 <input
-                    type="text" ref={inputData}
+                    type="text" ref={inputData} name="inputBox"
                     className="w-full h-full p-[0px_15px] border-2 border-solid rounded-[20px_0px_0px_20px]"
                     placeholder="Search"
                 />
                 {/* onClick={() => handleSearch()} */}
-                <button className="flex justify-center items-center w-[64px] h-[40px] border-2 border-solid p-[1px_6px] cursor-pointer bg-slate-100 rounded-[0px_40px_40px_0px]">
+                <button onClick={() => handleSearch(inputData.current.value)} className="flex justify-center items-center w-[64px] h-[40px] border-2 border-solid p-[1px_6px] cursor-pointer bg-slate-100 rounded-[0px_40px_40px_0px]">
                     <CiSearch className="w-[24px] h-[24px]" />
                 </button>
             </div>

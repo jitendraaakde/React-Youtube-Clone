@@ -6,8 +6,7 @@ const Hero = () => {
     const { toggle } = useSelector(state => state.sidebar)
     const marginLeft = toggle ? "ml-[110px]" : 'ml-[220px]'
 
-    return <div className={`mt-[56px] ${marginLeft} `}>
-        <HeroCategories></HeroCategories>
+    return <div className={`mt-14 ${marginLeft} `}>
         <VideoList />
     </div>
 }
