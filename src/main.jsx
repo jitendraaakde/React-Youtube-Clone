@@ -6,14 +6,17 @@ import './index.css'
 import Home from './components/Home.jsx'
 import store from './store/index.js'
 import SingleHome from './components/Single_Video-Compo/SingleHome.jsx'
+import SingleVideo from './components/Single_Video-Compo/SingleVideo.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <Home></Home>, children: [
-      { path: 'video', element: <SingleHome /> }
-    ]
+    path: '/',
+    element: <Home />,
+  },
+  {
+    path: '/watch', element: <SingleHome />
   }
-])
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

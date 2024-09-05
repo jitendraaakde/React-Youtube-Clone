@@ -37,7 +37,7 @@ const HeroCategories = () => {
     return (
         <div className={` ${marginLeft} flex bg-white fixed`}>
             <div className='w-[100%] flex '>
-                <button className="arrow left-arrow " onClick={() => handleSlide('left')}>&lt;</button>
+                {showLeft && <button className="arrow left-arrow " onClick={() => handleSlide('left')}>&lt;</button>}
 
                 <div className="flex overflow-x-scroll scrollable-container  float-start pl-3 pr-3" ref={scrollContainerRef}>
                     {youtubeCategories.map((item, index) => (

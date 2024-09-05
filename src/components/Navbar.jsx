@@ -24,7 +24,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="w-full h-[56px] fixed p-[0px_16px] z-500 flex justify-between items-center top-0 left-0 z-1000 bg-white">
+        <div className="w-full h-[56px] p-[0px_16px] z-500 flex justify-between items-center top-0 left-0 z-1000 bg-white fixed">
             <div className="flex justify-evenly items-center w-[169px] h-[56px] gap-1">
                 <div onClick={handleNavbar} className="cursor-pointer"><FiMenu className="w-[24px] h-[24px]" /></div>
                 <div className="w-[90px] h-[20px]">

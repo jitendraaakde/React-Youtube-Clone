@@ -1,4 +1,11 @@
+import { useLocation, useParams } from "react-router-dom"
 const SingleVideo = () => {
-    return <video src="https://rr4---sn-4g5lznl6.googlevideo.com/videoplayback?expire=1725465817&ei=eTDYZpvVOdi06dsPgOCOyAY&ip=2a01%3A4f8%3A1c1c%3A15cc%3A1334%3Abc2f%3A6e0a%3Ac0b5&id=o-AJmntlGKNHueiAlbXJjfh4TNuWk7cXGTqTHjz8KkbGxK&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&mh=cd&mm=31%2C26&mn=sn-4g5lznl6%2Csn-f5f7kn7e&ms=au%2Conr&mv=m&mvi=4&pl=51&initcwndbps=755000&bui=AQmm2ezoiVn16ylowjLJGI72OSpo9_QSe6GGFp7HXhutqZUDr-hVv0B8HI6pdtdU3ghuBHCYputHq7KX&spc=Mv1m9qMv9ZpZHKxHmOE-ShcO-U0ClXCVHklHAMNKLkbmTyG0-_I2&vprv=1&svpuc=1&mime=video%2Fmp4&ns=R0EOaauq1Y1NbF-zQi83e0kQ&rqh=1&gir=yes&clen=38157946&ratebypass=yes&dur=843.766&lmt=1628282244879617&mt=1725443825&fvip=3&c=WEB&sefc=1&txp=5538422&n=VPQxHfr8dioeVw&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIgYgtJkiHL-fDSM7oguUbX9Lh_ltbyyyBG2soxcNFKFgICIQDUy2QkIrCkggBYiAlYUz5HxR1TUMB9rzlQkja3H-ZfEA%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=ABPmVW0wRgIhALTgE_-_v_CA059DIRHw2R73XitySu5trwcrBK1weZP2AiEAlAqh6d4tBIm7RMB72Tvn5V0LX7-nppScYKQjqIZQg0E%3D"></video>
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const videoId = query.get('v');
+    return <>
+        <iframe style={{ borderRadius: '15px' }} width="853" height="480" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+    </>
 }
 export default SingleVideo
