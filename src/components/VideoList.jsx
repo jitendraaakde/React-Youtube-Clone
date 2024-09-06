@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchingActions } from "../store/fetchingDataSlice"
 import axios, { all } from "axios"
 import LoadingSpinner from "./LoadingSpinner"
-import { fetchDataForSingleVideo } from "../store/handleFetch"
 
 const VideoList = () => {
     const dispatch = useDispatch()
@@ -15,7 +14,7 @@ const VideoList = () => {
             method: 'GET',
             url: 'https://yt-api.p.rapidapi.com/home',
             headers: {
-                'x-rapidapi-key': 'd64b1b2da3msh33c3b61fe926816p12549ejsn41e27e7fda6d',
+                'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -29,7 +28,6 @@ const VideoList = () => {
 
     useEffect(() => {
         fetchData();
-        fetchDataForSingleVideo()
         return () => {
         };
     }, []);

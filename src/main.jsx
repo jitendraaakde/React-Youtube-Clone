@@ -6,7 +6,6 @@ import './index.css'
 import Home from './components/Home.jsx'
 import store from './store/index.js'
 import SingleHome from './components/Single_Video-Compo/SingleHome.jsx'
-import SingleVideo from './components/Single_Video-Compo/SingleVideo.jsx'
 
 const router = createBrowserRouter([
   {

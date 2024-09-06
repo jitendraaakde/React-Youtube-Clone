@@ -28,7 +28,7 @@ const Video = ({ item }) => {
             return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
         }
     }
-
+    console.log(item)
     return (
         <Link to={`/watch?v=${item.videoId
             }`}>

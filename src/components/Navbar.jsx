@@ -20,7 +20,6 @@ const Navbar = () => {
     }
     const handleSearch = (val) => {
         dispatch(searchFetchApi(val));
-
     };
 
     return (
