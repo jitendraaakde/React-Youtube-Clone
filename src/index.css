@@ -154,3 +154,45 @@
     width: 100%;
     height: 100%;
 }
+.related-video-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    line-height: 1.5em;
+    max-height: 3em;
+}
+.video-description {
+    display: -webkit-box;       /* Use Webkit box model */
+    -webkit-box-orient: vertical; /* Set the box orientation to vertical */
+    -webkit-line-clamp: 3;      /* Show only 3 lines */
+    overflow: hidden;           /* Hide overflow text */
+    text-overflow: ellipsis;    /* Add ellipsis at the end */
+    max-height: 4.5em;          /* Adjust max-height according to line height */
+    line-height: 1.5em;         /* Set line height for better readability */
+  }
+  
+  .description {
+    display: -webkit-box;            /* Use Webkit box model */
+    -webkit-box-orient: vertical;    /* Set the box orientation to vertical */
+    -webkit-line-clamp: 3;           /* Show only 3 lines */
+    overflow: hidden;                /* Hide overflow text */
+    text-overflow: ellipsis;         /* Add ellipsis at the end */
+    max-height: 4.5em;               /* Adjust max-height according to line height */
+    line-height: 1.5em;              /* Set line height for better readability */
+    transition: max-height 0.3s ease; /* Smooth transition */
+  }
+  
+  .description.expanded {
+    -webkit-line-clamp: unset;       /* Unset line clamp */
+    max-height: 100%;                /* Show full text */
+    overflow: visible;               /* Show overflow text */
+  }
+  
+  .show-more-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  

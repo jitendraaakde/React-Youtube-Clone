@@ -78,7 +78,10 @@ const Sidebar = () => {
     const marginLeft = toggle ? "w-[80px]" : ' w-[200px]'
     const dispatch = useDispatch()
     const currCategory = currFetch.fetchCategory;
+
     const categoryData = (value) => {
+        console.log('work')
+
         dispatch(searchFetchApi(value));
         dispatch(sidebarAction.changeCategory(value))
     }

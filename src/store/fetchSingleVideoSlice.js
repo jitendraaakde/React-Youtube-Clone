@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDataForSingleVideo } from './handleFetch';
+import { fetchDataForSingleVideo, relatedVideoApi } from './handleFetch';
 
 const videoSlice = createSlice({
     name: 'video',
@@ -22,7 +22,8 @@ const videoSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.payload || 'Failed to fetch video data';
             });
-    }
+    },
+
 });
 export const fetchDataForSingleVideoActions = videoSlice.actions
 export default videoSlice;

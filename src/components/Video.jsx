@@ -1,7 +1,10 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 
 const Video = ({ item }) => {
+    const { toggle } = useSelector(state => state.sidebar)
+
 
     const isValidItem = item?.type === 'video' &&
         item?.thumbnail?.[1]?.url &&
@@ -28,12 +31,12 @@ const Video = ({ item }) => {
             return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
         }
     }
-    console.log(item)
+
     return (
         <Link to={`/watch?v=${item.videoId
             }`}>
 
-            <div className="w-[343px] h-[300px] max-w-[800px] min-w-[310px] gap-1">
+            <div className={`${toggle ? 'w-[380px] h-[340px]' : 'w-[343px] h-[300px]'} max-w-[800px] min-w-[310px] gap-1`}>
                 <img
                     src={item.thumbnail[1].url}
                     className='w-full h-auto object-cover rounded-[15px]'

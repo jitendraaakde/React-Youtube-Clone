@@ -9,7 +9,7 @@ const fetchData = async () => {
         method: 'GET',
         url: 'https://yt-api.p.rapidapi.com/home',
         headers: {
-            'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
+            'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
             'x-rapidapi-host': 'yt-api.p.rapidapi.com'
         }
     };
@@ -28,12 +28,12 @@ export const searchFetchApi = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/search',
             params: { query },
             headers: {
-                'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
+                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
         const response = await axios.request(options);
-        return response.data.data; // Return the data
+        return response.data.data;
     }
 );
 
@@ -46,7 +46,7 @@ export const fetchDataForSingleVideo = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/video/info',
             params: { id: videoId },
             headers: {
-                'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
+                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -56,4 +56,40 @@ export const fetchDataForSingleVideo = createAsyncThunk(
     }
 );
 
+export const relatedVideoApi = createAsyncThunk(
+    'fetching/relatedVideoApi',
+    async (videoId) => {
+        const options = {
+            method: 'GET',
+            url: 'https://yt-api.p.rapidapi.com/related',
+            params: { id: videoId },
+            headers: {
+                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
+                'x-rapidapi-host': 'yt-api.p.rapidapi.com'
+            }
+        };
+        const response = await axios.request(options);
+        console.log("APi called", response.data.data)
+        return response.data.data;
 
+    }
+);
+
+export const infiniteScroll = createAsyncThunk(
+    'fetching/infiniteScroll',
+    async (videoId) => {
+        const options = {
+            method: 'GET',
+            url: 'https://yt-api.p.rapidapi.com/related',
+            params: { id: videoId },
+            headers: {
+                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
+                'x-rapidapi-host': 'yt-api.p.rapidapi.com'
+            }
+        };
+        const response = await axios.request(options);
+        console.log("APi called", response.data.data)
+        return response.data.data;
+
+    }
+);
