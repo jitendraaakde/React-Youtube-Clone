@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarAction } from "../store/navbarSlice";
 import { searchFetchApi } from "../store/handleFetch";
+import { heroCategoriesSliceActions } from "../store/heroCategoriesSlice";
 const Sidebar = () => {
     const currFetch = useSelector(state => state.sidebar)
 
@@ -80,10 +81,10 @@ const Sidebar = () => {
     const currCategory = currFetch.fetchCategory;
 
     const categoryData = (value) => {
-        console.log('work')
-
         dispatch(searchFetchApi(value));
         dispatch(sidebarAction.changeCategory(value))
+        dispatch(heroCategoriesSliceActions.changeCategoryList('All'));
+
     }
 
     return <div className={`h-full element ${marginLeft} ${toggle && 'navbar-css'} overflow-y-auto p-3 mt-16  flex fixed top-0 left-0 z-10 float-left flex-col`}>

@@ -4,6 +4,7 @@ import CategoriesButtons from './CategoriesButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import { heroCategoriesSliceActions } from '../store/heroCategoriesSlice';
 import { searchFetchApi } from '../store/handleFetch';
+import { sidebarAction } from '../store/navbarSlice';
 
 const HeroCategories = () => {
     const { current } = useSelector(state => state.heroCategory);
@@ -29,6 +30,8 @@ const HeroCategories = () => {
     const handleButtonClick = (value) => {
         dispatch(heroCategoriesSliceActions.changeCategoryList(value));
         dispatch(searchFetchApi(value));
+        dispatch(sidebarAction.changeCategory('Home'))
+
     };
 
     const { toggle } = useSelector(state => state.sidebar);

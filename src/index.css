@@ -196,3 +196,20 @@
     cursor: pointer;
   }
   
+  /* HTML: <div class="loader"></div> */
+.loader {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    left: 50%;
+    top: 60%;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #000 #0000;
+    animation: l1 1s infinite;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes l1 {to{transform: rotate(.5turn)}}

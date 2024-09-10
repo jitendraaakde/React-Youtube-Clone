@@ -5,6 +5,7 @@ const sidebarToggleSlice = createSlice({
     initialState: {
         toggle: false,
         fetchCategory: 'Home',
+        changeIcon: true
     },
     reducers: {
         toggleSidebar: (state) => {
@@ -12,6 +13,9 @@ const sidebarToggleSlice = createSlice({
         },
         changeCategory: (state, action) => {
             state.fetchCategory = action.payload
+        },
+        changeIcon: (state) => {
+            state.changeIcon = !state.changeIcon
         }
     }
 })

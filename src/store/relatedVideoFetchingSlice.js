@@ -12,7 +12,6 @@ const relatedVideoFetchSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(relatedVideoApi.pending, (state) => {
-                console.log("Loading data", state)
                 state.status = 'loading';
             })
             .addCase(relatedVideoApi.fulfilled, (state, action) => {

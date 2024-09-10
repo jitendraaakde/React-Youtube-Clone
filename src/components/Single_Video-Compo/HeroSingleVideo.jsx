@@ -17,10 +17,12 @@ const HeroSingleVideo = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const videoId = query.get('v');
+
     useEffect(() => {
         dispatch(fetchDataForSingleVideo(videoId))
         dispatch(relatedVideoApi(videoId))
     }, [])
+
     function formatNumber(number) {
         if (number < 1_000) {
             return number.toString();
@@ -32,7 +34,9 @@ const HeroSingleVideo = () => {
             return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
         }
     }
-    console.log(videoData)
+    let date = videoData.publishDate ? videoData.publishDate : ''
+    date = date.split('T')[0]
+
     return <div className="mt-20 w-[100%] h-[90vh] flex justify-center gap-10 ">
         <div className=" h-[100vh] w-[62%]">
             <iframe style={{ borderRadius: '15px' }} width="853" height="480" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player"  >
@@ -67,7 +71,7 @@ const HeroSingleVideo = () => {
             <div className="bg-slate-200  h-28 w-[98%] rounded-[17px] mt-4 m-[0px_auto] text-[14px]">
                 <div className="flex items-center gap-2 pl-3 pr-3 pt-2">
                     <p className="font-bold">{formatNumber(videoData.viewCount)} </p>
-                    <p className="font-bold">{videoData.publishDate ? videoData.publishDate : ''}</p>
+                    <p className="font-bold">{date}</p>
                 </div>
                 <div className={`w-[100%] pl-3 pr-3  description`}> <p className="">{videoData.description}</p></div>
             </div>

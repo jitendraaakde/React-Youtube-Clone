@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
+import { sidebarAction } from "../store/navbarSlice";
 
 const Video = ({ item }) => {
     const { toggle } = useSelector(state => state.sidebar)
-
-
+    const dispatch = useDispatch()
     const isValidItem = item?.type === 'video' &&
         item?.thumbnail?.[1]?.url &&
         item?.channelThumbnail?.[0]?.url &&
@@ -31,10 +32,9 @@ const Video = ({ item }) => {
             return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
         }
     }
-
     return (
         <Link to={`/watch?v=${item.videoId
-            }`}>
+            }`} >
 
             <div className={`${toggle ? 'w-[380px] h-[340px]' : 'w-[343px] h-[300px]'} max-w-[800px] min-w-[310px] gap-1`}>
                 <img

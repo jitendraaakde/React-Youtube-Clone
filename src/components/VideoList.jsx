@@ -2,21 +2,24 @@ import { useEffect } from "react"
 import Video from "./Video"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchingActions } from "../store/fetchingDataSlice"
-import axios, { all } from "axios"
+import axios from "axios"
 import LoadingSpinner from "./LoadingSpinner"
-import { infiniteScroll, searchFetchApi } from "../store/handleFetch"
+import { loadForInfiniteScroll, searchFetchApi } from "../store/handleFetch"
+import { useLocation } from "react-router-dom"
 
 const VideoList = () => {
     const dispatch = useDispatch()
     const videoData = useSelector(state => state.fetchingData)
     const allVideos = videoData.data
+    const location = useLocation();
+
 
     const fetchData = async () => {
         const options = {
             method: 'GET',
             url: 'https://yt-api.p.rapidapi.com/home',
             headers: {
-                'x-rapidapi-key': 'a47f187799mshabd0c3558769d73p1df6b5jsn53fcff8d3654',
+                'x-rapidapi-key': 'c1ae4f7dd0mshfb85e8b9c8239b3p16ff52jsnda2e38311629',
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -29,20 +32,27 @@ const VideoList = () => {
     };
 
     useEffect(() => {
-        fetchData();
+        if (location.state && location.state.searchValue) {
+            dispatch(searchFetchApi(location.state.searchValue));
+        } else {
+            fetchData();
+
+        }
         return () => {
         };
     }, []);
 
     const youtubeCategories = [
-        'Music', 'Gaming', 'News', 'Sports', 'Movies', 'Education',
-        'Comedy', 'Technology', 'Science', 'Fitness', 'Travel', 'Food',
-        'Vlogs', 'DIY', 'Beauty', 'Fashion', 'Reviews', 'Lifestyle', 'Pets'
+        'History', 'Photography', 'Architecture', 'Wildlife', 'Nature', 'Motivation',
+        'Meditation', 'Animation', 'Astrology', 'Psychology', 'Finance', 'Entrepreneurship',
+        'Crafts', 'Gardening', 'Automobiles', 'Astronomy', 'Music Production', 'Martial Arts',
+        'Literature', 'Adventure'
     ];
+
     let i = 0;
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-            dispatch(infiniteScroll(youtubeCategories[i]));
+            dispatch(loadForInfiniteScroll(youtubeCategories[i]));
             i++;
         }
     };
@@ -54,9 +64,12 @@ const VideoList = () => {
         };
     }, []);
 
-    return <div className=" container pt-14 gap-4" >
-        {allVideos.length == 0 ? <LoadingSpinner /> : allVideos.map((item) => <Video key={item.videoId} item={item} />)}
-    </div>
+    return <>
+        <div className=" container pt-14 gap-4" >
+            {allVideos.length === 0 ? <LoadingSpinner /> : allVideos.map((item) => <Video key={item.videoId} item={item} />)}
+        </div>
+        <div className="loader w-[100%]"></div>
+    </>
 }
 
 export default VideoList

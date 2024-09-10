@@ -1,12 +1,13 @@
 // fetchingDataSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { infiniteScroll, searchFetchApi } from './handleFetch';
+import { loadForInfiniteScroll, searchFetchApi } from './handleFetch';
 
 const fetchingSlice = createSlice({
     name: 'fetching',
     initialState: {
         data: [],
-        status: 'idle',
+        status: 'loading',
+        load: 'loading',
         error: null,
     },
     reducers: {
@@ -26,10 +27,20 @@ const fetchingSlice = createSlice({
             .addCase(searchFetchApi.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            }).addCase(infiniteScroll.fulfilled, (state, action) => {
-                state.data = [...state.data, ...action.payload]
             })
-    },
+        builder
+            .addCase(loadForInfiniteScroll.pending, (state) => {
+                state.load = 'loading';
+            })
+            .addCase(loadForInfiniteScroll.fulfilled, (state, action) => {
+                state.load = 'succeeded';
+                state.data = [...state.data, ...action.payload];
+            })
+            .addCase(loadForInfiniteScroll.rejected, (state, action) => {
+                state.load = 'failed';
+                state.error = action.payload;
+            });
+    }
 }
 )
 export const fetchingActions = fetchingSlice.actions;
