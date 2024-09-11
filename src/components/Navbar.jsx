@@ -8,12 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { sidebarAction } from "../store/navbarSlice";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { PiLessThan } from "react-icons/pi";
+import { FaLessThan } from "react-icons/fa6";
 
 
 const Navbar = () => {
     const { changeIcon } = useSelector(state => state.sidebar)
-    console.log(changeIcon)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const inputData = useRef()
@@ -22,19 +21,23 @@ const Navbar = () => {
         dispatch(sidebarAction.toggleSidebar())
     }
     const handleSearch = (val) => {
-        navigate('/', { state: { searchValue: val } });
+        console.log(val, "search value")
+        // navigate('/', { state: { searchValue: val } });
     };
+    const clickForchangeIcon = () => {
+        dispatch(sidebarAction.changeIcon())
+        navigate('/')
+    }
 
     return (
         <div className="w-full h-[56px] p-[0px_16px] z-500 flex justify-between items-center top-0 left-0 z-1000 bg-white fixed">
             <div className="flex justify-evenly items-center w-[169px] h-[56px] gap-1">
-                <div onClick={handleNavbar} className="cursor-pointer"><FiMenu className="w-[24px] h-[24px]" />
+                <div className="cursor-pointer"> {changeIcon ? <FaLessThan className="font-bold" onClick={clickForchangeIcon} /> : <FiMenu onClick={handleNavbar} className="w-[24px] h-[24px]" />}
                 </div>
                 <div className="w-[90px] h-[20px]">
                     <Link to="/"> <img src={youtubeLogo} alt="YouTube Logo" className="w-full h-auto" /></Link>
                 </div>
             </div>
-
             <div className="w-[45%] h-10 flex items-center">
                 <input
                     type="text" ref={inputData} name="inputBox"

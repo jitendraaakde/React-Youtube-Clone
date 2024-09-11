@@ -34,7 +34,7 @@ const Video = ({ item }) => {
     }
     return (
         <Link to={`/watch?v=${item.videoId
-            }`} >
+            }`} onClick={() => dispatch(sidebarAction.changeIcon())} >
 
             <div className={`${toggle ? 'w-[380px] h-[340px]' : 'w-[343px] h-[300px]'} max-w-[800px] min-w-[310px] gap-1`}>
                 <img

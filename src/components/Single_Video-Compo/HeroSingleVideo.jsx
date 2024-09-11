@@ -12,7 +12,7 @@ import RelatedVideos from "./RelatedVideos";
 const HeroSingleVideo = () => {
     const { videoData } = useSelector(state => state.singleVideo);
     const { data } = useSelector(state => state.relatedVideo);
-
+    const [likeDislike, setLikeDislike] = useState('')
     const dispatch = useDispatch();
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -37,13 +37,13 @@ const HeroSingleVideo = () => {
     let date = videoData.publishDate ? videoData.publishDate : ''
     date = date.split('T')[0]
 
-    return <div className="mt-20 w-[100%] h-[90vh] flex justify-center gap-10 ">
+    return <div className="mt-20 w-[100%] h-[90vh] flex justify-center gap-10 single-video ">
         <div className=" h-[100vh] w-[62%]">
-            <iframe style={{ borderRadius: '15px' }} width="853" height="480" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player"  >
+            <iframe style={{ borderRadius: '15px' }} className="w-[100%] h-[480px]" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player"  >
             </iframe>
             <p className="text-[20px] m-2 font-bold">{videoData?.title}</p>
 
-            <div className="flex justify-between items-center mr-2 ml-2">
+            <div className="flex justify-between items-center mr-2 ml-2 gap-3">
                 <div className="flex justify-center items-center gap-5">
                     <div className="flex justify-around gap-3">
                         <img src={videoData?.thumbnail?.[0]?.url} className="h-10 w-10 rounded-[50%]" alt="" />
@@ -68,7 +68,7 @@ const HeroSingleVideo = () => {
 
                 </div>
             </div>
-            <div className="bg-slate-200  h-28 w-[98%] rounded-[17px] mt-4 m-[0px_auto] text-[14px]">
+            <div className="bg-slate-200  h-28 w-[98%] rounded-[17px] mt-4 m-[0px_auto] text-[14px] ">
                 <div className="flex items-center gap-2 pl-3 pr-3 pt-2">
                     <p className="font-bold">{formatNumber(videoData.viewCount)} </p>
                     <p className="font-bold">{date}</p>

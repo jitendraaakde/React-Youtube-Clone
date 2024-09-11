@@ -27,7 +27,7 @@ const RelatedVideos = ({ item }) => {
     }
     return <Link to={`/watch?v=${item.videoId
         }`}>
-        <div className='flex gap-3 mt-2'>
+        <div className='flex gap-3 mt-2 w-[100%]'>
             <img src={item.thumbnail[1].url} className='w-40 h-24 rounded-[10px]' alt="" />
             <div className=''>
                 <p className='text-[14px] mt-1 font-bold related-video-title'>{item.title}</p>
