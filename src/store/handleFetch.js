@@ -1,25 +1,7 @@
 
-import { fetchingActions } from "./fetchingDataSlice";
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-
-const fetchData = async () => {
-    const options = {
-        method: 'GET',
-        url: 'https://yt-api.p.rapidapi.com/home',
-        headers: {
-            'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
-            'x-rapidapi-host': 'yt-api.p.rapidapi.com'
-        }
-    };
-    try {
-        const response = await axios.request(options);
-        dispatch(fetchingActions.initialFetch(response.data));
-    } catch (error) {
-        console.error('Failed to fetch data:', error);
-    }
-};
+export const API_ID = import.meta.env.VITE_ID
 export const searchFetchApi = createAsyncThunk(
     'fetching/searchFetchApi',
     async (query) => {
@@ -28,7 +10,7 @@ export const searchFetchApi = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/search',
             params: { query },
             headers: {
-                'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
+                'x-rapidapi-key': API_ID,
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -44,7 +26,7 @@ export const loadForInfiniteScroll = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/search',
             params: { query },
             headers: {
-                'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
+                'x-rapidapi-key': API_ID,
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -62,7 +44,7 @@ export const fetchDataForSingleVideo = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/video/info',
             params: { id: videoId },
             headers: {
-                'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
+                'x-rapidapi-key': API_ID,
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -80,7 +62,7 @@ export const relatedVideoApi = createAsyncThunk(
             url: 'https://yt-api.p.rapidapi.com/related',
             params: { id: videoId },
             headers: {
-                'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
+                'x-rapidapi-key': API_ID,
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -89,3 +71,4 @@ export const relatedVideoApi = createAsyncThunk(
 
     }
 );
+

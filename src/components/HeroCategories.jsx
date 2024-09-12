@@ -5,21 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { heroCategoriesSliceActions } from '../store/heroCategoriesSlice';
 import { searchFetchApi } from '../store/handleFetch';
 import { sidebarAction } from '../store/navbarSlice';
+import { youtubeCategories } from '../store/helperFunction';
 
 const HeroCategories = () => {
     const { current } = useSelector(state => state.heroCategory);
     const dispatch = useDispatch();
-    const youtubeCategories = [
-        'All', 'Music', 'Gaming', 'News', 'Sports', 'Movies', 'Education',
-        'Comedy', 'Technology', 'Science', 'Fitness', 'Travel', 'Food', 'Vlogs', 'DIY', 'Beauty', 'Fashion', 'Reviews', 'Lifestyle', 'Pets'
-
-    ];
-
     const [showLeft, setShowLeft] = useState(false);
     const scrollContainerRef = useRef(null);
-
-
-
     const handleButtonClick = (value) => {
         dispatch(heroCategoriesSliceActions.changeCategoryList(value));
         dispatch(searchFetchApi(value));
@@ -28,7 +20,6 @@ const HeroCategories = () => {
     };
 
     const { toggle } = useSelector(state => state.sidebar);
-    const marginLeft = toggle ? "ml-[110px]" : 'ml-[220px]';
 
     const handleSlide = (direction) => {
         setShowLeft(true);
@@ -41,13 +32,13 @@ const HeroCategories = () => {
     };
     //   
     return (
-        <div className={`${toggle ? 'w-[92%] ml-[8%]' : 'w-[85%]  ml-[15%]'} flex bg-white fixed items-center  px-4 `}>
-            <button
+        <div className={`${toggle ? 'w-[92%] ml-[8%]' : 'w-[85%]  ml-[15%]'} flex bg-white fixed items-center  px-4 hero-cate `}>
+            {showLeft && <button
                 className="arrow left-arrow absolute p-1 "
                 onClick={() => handleSlide('left')}
             >
                 &lt;
-            </button>
+            </button>}
 
             <div
                 className="flex overflow-x-scroll w-full categories-name"

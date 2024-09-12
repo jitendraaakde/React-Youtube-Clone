@@ -19,23 +19,27 @@ const Navbar = () => {
 
     const handleNavbar = () => {
         dispatch(sidebarAction.toggleSidebar())
+        inputData.current.value = ""
+
     }
     const handleSearch = (val) => {
-        console.log(val, "search value")
-        // navigate('/', { state: { searchValue: val } });
+        navigate('/', { state: { searchValue: val } });
+        if (changeIcon) {
+            dispatch(sidebarAction.changeIcon())
+        }
     };
     const clickForchangeIcon = () => {
         dispatch(sidebarAction.changeIcon())
         navigate('/')
     }
-
     return (
         <div className="w-full h-[56px] p-[0px_16px] z-500 flex justify-between items-center top-0 left-0 z-1000 bg-white fixed">
             <div className="flex justify-evenly items-center w-[169px] h-[56px] gap-1">
                 <div className="cursor-pointer"> {changeIcon ? <FaLessThan className="font-bold" onClick={clickForchangeIcon} /> : <FiMenu onClick={handleNavbar} className="w-[24px] h-[24px]" />}
                 </div>
                 <div className="w-[90px] h-[20px]">
-                    <Link to="/"> <img src={youtubeLogo} alt="YouTube Logo" className="w-full h-auto" /></Link>
+                    <Link to="/" onClick={changeIcon ? () => dispatch(sidebarAction.changeIcon()) : () => { }} >
+                        <img src={youtubeLogo} alt="YouTube Logo" className="w-full h-auto" /></Link>
                 </div>
             </div>
             <div className="w-[45%] h-10 flex items-center">

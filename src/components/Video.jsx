@@ -3,6 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import { sidebarAction } from "../store/navbarSlice";
+import { formatNumber } from "../store/helperFunction";
 
 const Video = ({ item }) => {
     const { toggle } = useSelector(state => state.sidebar)
@@ -16,22 +17,6 @@ const Video = ({ item }) => {
         item?.publishedTimeText;
 
     if (!isValidItem) return null;
-
-    function formatNumber(number) {
-        if (number < 1_000) {
-            // Less than 1000, return the number itself
-            return number.toString();
-        } else if (number < 1_000_000) {
-            // Less than 1 million, format as thousands with 'K'
-            return (number / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
-        } else if (number < 1_000_000_000) {
-            // Less than 1 billion, format as millions with 'M'
-            return (number / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
-        } else {
-            // 1 billion or more, format as billions with 'B'
-            return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
-        }
-    }
     return (
         <Link to={`/watch?v=${item.videoId
             }`} onClick={() => dispatch(sidebarAction.changeIcon())} >

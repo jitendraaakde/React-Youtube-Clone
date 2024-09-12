@@ -2,44 +2,34 @@ import { AiOutlineLike } from "react-icons/ai";
 import { BiDislike } from "react-icons/bi";
 import { PiShareFat } from "react-icons/pi";
 import { MdOutlineFileDownload } from "react-icons/md";
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchDataForSingleVideo, relatedVideoApi } from "../../store/handleFetch";
 import RelatedVideos from "./RelatedVideos";
+import { formatNumber } from "../../store/helperFunction";
 
 
 const HeroSingleVideo = () => {
     const { videoData } = useSelector(state => state.singleVideo);
     const { data } = useSelector(state => state.relatedVideo);
-    const [likeDislike, setLikeDislike] = useState('')
     const dispatch = useDispatch();
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const videoId = query.get('v');
 
     useEffect(() => {
-        dispatch(fetchDataForSingleVideo(videoId))
-        dispatch(relatedVideoApi(videoId))
-    }, [])
-
-    function formatNumber(number) {
-        if (number < 1_000) {
-            return number.toString();
-        } else if (number < 1_000_000) {
-            return (number / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
-        } else if (number < 1_000_000_000) {
-            return (number / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
-        } else {
-            return (number / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
+        if (videoId) {
+            dispatch(fetchDataForSingleVideo(videoId));
+            dispatch(relatedVideoApi(videoId));
         }
-    }
+    }, [dispatch, videoId]); // Added videoId and dispatch to the dependency array
     let date = videoData.publishDate ? videoData.publishDate : ''
     date = date.split('T')[0]
 
     return <div className="mt-20 w-[100%] h-[90vh] flex justify-center gap-10 single-video ">
         <div className=" h-[100vh] w-[62%]">
-            <iframe style={{ borderRadius: '15px' }} className="w-[100%] h-[480px]" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player"  >
+            <iframe style={{ borderRadius: '15px' }} className="w-[100%] h-[480px] single-video-player" src={`https://www.youtube.com/embed/${videoId}?si=rMnd9PE7FJYgKHlL`} title="YouTube video player"  >
             </iframe>
             <p className="text-[20px] m-2 font-bold">{videoData?.title}</p>
 
@@ -76,9 +66,12 @@ const HeroSingleVideo = () => {
                 <div className={`w-[100%] pl-3 pr-3  description`}> <p className="">{videoData.description}</p></div>
             </div>
         </div>
-        <div className=" h-[100vh] w-[32%] min-w-4 overflow-y-scroll">
-            {data.map((item) => <RelatedVideos item={item} />)}
+        <div className="h-[100vh] w-[32%] min-w-4 overflow-y-scroll">
+            {data.map((item, index) => (
+                <RelatedVideos key={item.videoId || index} item={item} />
+            ))}
         </div>
+
 
     </div>
 }

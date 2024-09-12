@@ -22,7 +22,6 @@ const fetchingSlice = createSlice({
             })
             .addCase(searchFetchApi.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                console.log('state', state, 'action', action)
                 state.data = action.payload;
             })
             .addCase(searchFetchApi.rejected, (state, action) => {

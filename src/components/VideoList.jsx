@@ -1,15 +1,17 @@
 import { useEffect } from "react"
 import Video from "./Video"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchingActions } from "../store/fetchingDataSlice"
-import axios from "axios"
 import LoadingSpinner from "./LoadingSpinner"
-import { loadForInfiniteScroll, searchFetchApi } from "../store/handleFetch"
+import { API_ID, loadForInfiniteScroll, searchFetchApi } from "../store/handleFetch"
 import { useLocation } from "react-router-dom"
+import { UniqueYoutubeCategories } from "../store/helperFunction"
+import axios from "axios"
+import { fetchingActions } from "../store/fetchingDataSlice"
 
 const VideoList = () => {
     const dispatch = useDispatch()
     const videoData = useSelector(state => state.fetchingData)
+    const { changeIcon } = useSelector(state => state.sidebar)
     const allVideos = videoData.data
     const location = useLocation();
     const fetchData = async () => {
@@ -17,7 +19,7 @@ const VideoList = () => {
             method: 'GET',
             url: 'https://yt-api.p.rapidapi.com/home',
             headers: {
-                'x-rapidapi-key': '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6',
+                'x-rapidapi-key': API_ID,
                 'x-rapidapi-host': 'yt-api.p.rapidapi.com'
             }
         };
@@ -31,26 +33,15 @@ const VideoList = () => {
 
     useEffect(() => {
         if (location.state && location.state.searchValue) {
-            console.log('search valye 2', location.state)
             dispatch(searchFetchApi(location.state.searchValue));
         } else {
             fetchData();
         }
-        return () => {
-        };
-    }, []);
-
-    const youtubeCategories = [
-        'History', 'Photography', 'Architecture', 'Wildlife', 'Nature', 'Motivation',
-        'Meditation', 'Animation', 'Astrology', 'Psychology', 'Finance', 'Entrepreneurship',
-        'Crafts', 'Gardening', 'Automobiles', 'Astronomy', 'Music Production', 'Martial Arts',
-        'Literature', 'Adventure'
-    ];
-
+    }, [location.state, location.state?.searchValue]); // Add dependencies
     let i = 0;
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-            dispatch(loadForInfiniteScroll(youtubeCategories[i]));
+            dispatch(loadForInfiniteScroll(UniqueYoutubeCategories[i]));
             i++;
         }
     };
@@ -63,10 +54,18 @@ const VideoList = () => {
     }, []);
 
     return <>
-        <div className=" container pt-14 gap-4" >
-            {allVideos.length === 0 ? <LoadingSpinner /> : allVideos.map((item) => <Video key={item.videoId} item={item} />)}
-        </div>
-        <div className="loader w-[100%]"></div>
+        <>
+            <div className="container pt-14 gap-3">
+                {allVideos.length === 0 ? (
+                    <LoadingSpinner />
+                ) : (
+                    allVideos.map((item, index) => (
+                        <Video key={item.videoId || index} item={item} /> // Using item.videoId or index as a fallback
+                    ))
+                )}
+            </div>
+            <div className="loader w-[100%]"></div>
+        </>
     </>
 }
 
