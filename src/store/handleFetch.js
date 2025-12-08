@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-export const API_ID = import.meta.env.VITE_ID
+export const API_ID = '4f453754bamsh0092c24269f09fdp11b298jsn8968eeef8bb6'
 export const searchFetchApi = createAsyncThunk(
     'fetching/searchFetchApi',
     async (query) => {
